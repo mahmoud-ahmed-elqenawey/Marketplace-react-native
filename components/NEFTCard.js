@@ -2,10 +2,12 @@ import { View, Image, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { COLORS, SIZES, SHADOWS, assets } from '../constants';
-import { CircleButton } from './Button';
+import { CircleButton, RectButton } from './Button';
 import { Subinfo, EthPrice, NFTTitle } from './Subinfo';
 
 const NEFTCard = ({ data }) => {
+    const navigation = useNavigation();
+
     return (
         <View
             style={{
@@ -32,6 +34,32 @@ const NEFTCard = ({ data }) => {
             </View>
 
             <Subinfo />
+
+            <View style={{ width: '100%', padding: SIZES.font }}>
+                <NFTTitle
+                    title={data.name}
+                    subTitle={data.creator}
+                    titleSize={SIZES.large}
+                    subTitleSize={SIZES.small}
+                />
+            </View>
+
+            <View
+                style={{
+                    marginTop: SIZES.font,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: SIZES.base,
+                }}
+            >
+                <EthPrice price={data.price} />
+                <RectButton
+                    minWidth={120}
+                    fontSize={SIZES.font}
+                    handlePress={() => navigation.navigate('Details', { data })}
+                />
+            </View>
         </View>
     );
 };

@@ -16,7 +16,7 @@ const Home = () => {
                         renderItem={({ item }) => <NEFTCard data={item} />}
                         keyExtractor={(item) => item.id}
                         showsVerticalScrollIndicator={false}
-                        ListHeaderComponent={HomeHeader}
+                        ListHeaderComponent={<HomeHeader />}
                     />
                 </View>
                 <View

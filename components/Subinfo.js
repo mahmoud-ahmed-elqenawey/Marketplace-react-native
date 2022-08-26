@@ -1,43 +1,116 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
-import { SIZES } from '../constants';
+import { SIZES, assets, SHADOWS, FONTS, COLORS } from '../constants';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-export const NFTTitle = () => {
+export const NFTTitle = ({ title, subTitle, titleSize, subTitleSize }) => {
     return (
         <View>
-            <Text>NFTTitle</Text>
+            <Text
+                style={{
+                    fontFamily: FONTS.semiBold,
+                    fontSize: titleSize,
+                    color: COLORS.primary,
+                }}
+            >
+                {title}
+            </Text>
+            <Text
+                style={{
+                    fontFamily: FONTS.regular,
+                    fontSize: subTitleSize,
+                    color: COLORS.primary,
+                }}
+            >
+                {subTitle}
+            </Text>
         </View>
     );
 };
 
-export const EthPrice = () => {
+export const EthPrice = ({ price }) => {
     return (
-        <View>
-            <Text>EthPrice</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image
+                source={assets.eth}
+                resizeMode='contain'
+                style={{ width: 20, height: 20, marginRight: 2 }}
+            />
+            <Text
+                style={{
+                    fontFamily: FONTS.medium,
+                    fontSize: SIZES.font,
+                    color: COLORS.primary,
+                }}
+            >
+                {price}
+            </Text>
         </View>
     );
 };
 
-export const ImageCmp = () => {
+export const ImageCmp = ({ imgUrl, index }) => {
     return (
-        <View>
-            <Text>ImageCmp</Text>
-        </View>
+        <Image
+            source={imgUrl}
+            resizeMode='contain'
+            style={{
+                width: 48,
+                height: 48,
+                marginLeft: index === 0 ? 0 : -SIZES.font,
+            }}
+        />
     );
 };
 
 export const People = () => {
     return (
-        <View>
-            <Text>People</Text>
+        <View style={{ flexDirection: 'row' }}>
+            {[assets.person02, assets.person03, assets.person04].map(
+                (imageUrl, index) => (
+                    <ImageCmp
+                        imgUrl={imageUrl}
+                        index={index}
+                        key={`People=${index}`}
+                    />
+                )
+            )}
         </View>
     );
 };
 
 export const EndDate = () => {
     return (
-        <View>
-            <Text>EndDate</Text>
+        <View
+            style={{
+                paddingHorizontal: SIZES.font,
+                paddingVertical: SIZES.base,
+                backgroundColor: Colors.white,
+                justifyContent: 'center',
+                alignItems: 'center',
+                ...SHADOWS.light,
+                elevation: 1,
+                maxWidth: '50%',
+            }}
+        >
+            <Text
+                style={{
+                    fontFamily: FONTS.regular,
+                    fontSize: SIZES.small,
+                    color: COLORS.primary,
+                }}
+            >
+                Ending in
+            </Text>
+            <Text
+                style={{
+                    fontFamily: FONTS.semiBold,
+                    fontSize: SIZES.medium,
+                    color: COLORS.primary,
+                }}
+            >
+                12h 30m
+            </Text>
         </View>
     );
 };
@@ -53,7 +126,8 @@ export const Subinfo = () => {
                 justifyContent: 'space-between',
             }}
         >
-            <Text>Subinfo</Text>
+            <People />
+            <EndDate />
         </View>
     );
 };
