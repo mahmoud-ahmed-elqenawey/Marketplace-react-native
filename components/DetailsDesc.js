@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 
 import { EthPrice, NFTTitle } from './Subinfo';
 import { COLORS, SIZES, FONTS } from '../constants';
+import { useState } from 'react';
 
 const DetailsDesc = ({ data }) => {
     const [text, setText] = useState(data.description.slice(0, 100));
