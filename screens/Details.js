@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Image } from 'react-native';
+import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import {
     CircleButton,
     DetailsBid,
+    DetailsDesc,
     FocusedStatusBar,
     RectButton,
+    Subinfo,
 } from '../components';
 import { assets, SHADOWS, SIZES } from '../constants';
 
@@ -21,6 +23,14 @@ const DetailsHeader = ({ data, navigation }) => {
             <CircleButton
                 imgUrl={assets.left}
                 handlePress={() => navigation.goBack()}
+                left={15}
+                top={StatusBar.currentHeight + 10}
+            />
+
+            <CircleButton
+                imgUrl={assets.heart}
+                right={15}
+                top={StatusBar.currentHeight + 10}
             />
         </View>
     );
@@ -28,7 +38,6 @@ const DetailsHeader = ({ data, navigation }) => {
 
 const Details = ({ route, navigation }) => {
     const { data } = route.params;
-    console.log(data);
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <FocusedStatusBar
@@ -65,6 +74,10 @@ const Details = ({ route, navigation }) => {
                 ListHeaderComponent={() => (
                     <React.Fragment>
                         <DetailsHeader data={data} navigation={navigation} />
+                        <Subinfo />
+                        <View style={{ padding: SIZES.font }}>
+                            <DetailsDesc data={data} />
+                        </View>
                     </React.Fragment>
                 )}
             />
